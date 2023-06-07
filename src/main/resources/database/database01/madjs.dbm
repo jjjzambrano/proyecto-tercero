@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.7.2" last-position="0,0" last-zoom="1.2">
+<database name="new_database">
+</database>
+
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="cliente">
+	<schema name="public"/>
+	<position x="36" y="26"/>
+	<column name="cliente_id">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="cedula" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="direccion" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="telefono" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="correo" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="cliente_id" type="pk-constr" factor="100" table="public.cliente">
+		<columns names="cliente_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="producto">
+	<schema name="public"/>
+	<position x="837.5" y="39.1667"/>
+	<column name="producto_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="codigo" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="precio" not-null="true">
+		<type name="numeric" length="12" precision="2"/>
+	</column>
+	<column name="stock" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="producto_id" type="pk-constr" factor="100" table="public.producto">
+		<columns names="producto_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="proveedor">
+	<schema name="public"/>
+	<position x="42.5" y="242.5"/>
+	<column name="proveedor_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="ruc" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="direccion" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="telefono" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="proveedor_id" type="pk-constr" factor="100" table="public.proveedor">
+		<columns names="proveedor_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="empleado">
+	<schema name="public"/>
+	<position x="41" y="359"/>
+	<column name="empleado_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="cedula" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="cargo" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="horario" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="direccion" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="telefono" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<constraint name="empleado_id" type="pk-constr" factor="100" table="public.empleado">
+		<columns names="empleado_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="factura">
+	<schema name="public"/>
+	<position x="463.5" y="42.3333"/>
+	<column name="factura_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="fecha" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="ruc" not-null="true">
+		<type name="character varying"/>
+	</column>
+	<column name="subtotal">
+		<type name="numeric" length="12" precision="2"/>
+	</column>
+	<constraint name="factura_id" type="pk-constr" factor="100" table="public.factura">
+		<columns names="factura_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="detalle_factura">
+	<schema name="public"/>
+	<position x="460" y="252.666"/>
+	<column name="detalle_factura_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="producto_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="factura_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="cliente_id" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="cantidad_producto" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="detalle_factura_id" type="pk-constr" factor="100" table="public.detalle_factura">
+		<columns names="detalle_factura_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="factura_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.factura" table="public.detalle_factura">
+	<columns names="factura_id" ref-type="src-columns"/>
+	<columns names="factura_id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="producto_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.producto" table="public.detalle_factura">
+	<columns names="producto_id" ref-type="src-columns"/>
+	<columns names="producto_id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="cliente_id" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.cliente" table="public.detalle_factura">
+	<columns names="cliente_id" ref-type="src-columns"/>
+	<columns names="cliente_id" ref-type="dst-columns"/>
+</constraint>
+<relationship name="rel_detalle_factura_factura" type="relfk"
+	 src-table="public.detalle_factura"
+	 dst-table="public.factura"
+	 src-required="true" dst-required="true">
+	<label ref-type="name-label">
+		<position x="1.7257" y="-50.9652"/>
+	</label>
+</relationship>
+
+<relationship name="rel_detalle_factura_producto" type="relfk"
+	 src-table="public.detalle_factura"
+	 dst-table="public.producto"
+	 src-required="true" dst-required="true">
+	<label ref-type="name-label">
+		<position x="96.9759" y="-2.71505"/>
+	</label>
+</relationship>
+
+<relationship name="rel_detalle_factura_cliente" type="relfk"
+	 src-table="public.detalle_factura"
+	 dst-table="public.cliente"
+	 src-required="true" dst-required="true"/>
+
+</dbmodel>

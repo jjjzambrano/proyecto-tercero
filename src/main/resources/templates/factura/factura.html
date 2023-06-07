@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="shortcut icon" th:href="@{/style/img/logo-madjs.png}" type="image/png" width="3px">
+    <title>MAD-JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style/factura/factura.css}">
+
+</head>
+
+<body>
+    <div th:insert="~{ header ::menu }"></div>
+    <div class="container">
+        <div class="container">
+            <div class="main-block">
+                <div class="left-part">
+                    <img th:src="@{/style/img/logo-madjs.png}" alt="" width="450px">
+                    <h1 style="color: black;">Registro Factura</h1>
+                    <div class="btn-group">
+                    </div>
+                </div>
+                <form th:action="@{/factura/procesaFormulario}" th:object="${detalleYFactura}" method="post">
+                    <div class="title">
+                        <i class="fas fa-pencil-alt"></i>
+                        <h2>Registro cliente</h2>
+                    </div>
+
+                    <label class="col-sm-3">Cliente:</label>
+                    <select class="col-sm-6" id="clienteId" th:field="*{clienteId}">
+                        <option th:each="cliente : ${clientes}" th:text="${cliente.nombre}"
+                            th:value="${cliente.clienteId}">
+                        </option>
+                    </select>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Producto:</label>
+                        <select class="col-sm-6" id="productoId" th:field="*{productoId}">
+                            <option th:each="producto : ${productos}" th:text="${producto.nombre}"
+                                th:value="${producto.productoId}"></option>
+                        </select>
+                        <div class="form-group row">
+                            <label class="col-sm-3">Precio:</label>
+                            <select class="col-sm-6" id="productoId" th:field="*{productoId}">
+                                <option th:each="producto : ${productos}" th:text="${producto.precio}"
+                                    th:value="${producto.productoId}"></option>
+                            </select>
+                            <div class="form-group row">
+                                <label class="col-sm-3">Cantidad Productos:</label>
+                                <input type="text" th:field="*{cantidadProducto}" class="col-sm-6">
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3">Fecha:</label>
+                                <input type="date" th:field="*{fecha}" class="col-sm-6" required>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3">Ruc:</label>
+                                <input type="text" th:field="*{ruc}" class="col-sm-6" required>
+                            </div>
+                            <button type="submit" class="btn btn-success" name="button" value="agregar">Agregar</button>
+
+                            <center>
+                                <h2 style="color: white;">Productos</h2>
+                            </center>
+
+                            <table class="table">
+                                <tr>
+                                    <th style="color: white;">Cliente</th>
+                                    <th style="color: white;">Producto</th>
+                                    <th style="color: white;">Cantidad</th>
+                                    <th style="color: white;">Eliminar</th>
+                                </tr>
+                                <tr th:each=" factura : ${tablaFactura?.entrySet()}">
+                                    <td style="color: white;" th:text="${factura.value[0]}"></td>
+                                    <td style="color: white;" th:text="${factura.value[1]}"></td>
+                                    <td style="color: white;" th:text="${factura.value[2]}"></td>
+                                    <td>
+                                        <button type="submit" class="btn btn-danger" name="button"
+                                            value="eliminar">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button type="submit" class="btn btn-primary" name="button"
+                                value="factura">Facturar</button>
+                            <input type="hidden" th:field="*{facturaId}">
+                </form>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="shortcut icon" th:href="@{/style/img/logo-madjs.png}" type="image/png" width="3px">
+    <title>MAD-JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style/producto/productoFormulario.css}">
+</head>
+
+<body>
+    <div th:insert="~{ header ::menu }"></div>
+    <div class="main-block">
+        <div class="left-part">
+            <img th:src="@{/style/img/logo-madjs.png}" alt="" width="450px">
+            <h1>Registro Producto</h1>
+            <div class="btn-group">
+            </div>
+        </div>
+        <form th:action="@{/producto/procesar}" method="post" th:object="${producto}">
+            <div class="title">
+                <i class="fas fa-pencil-alt"></i>
+                <h2>Registro del Producto</h2>
+            </div>
+            <div class="info">
+                <label>Código del Producto:</label>
+                <input type="text" placeholder="Ingrese el código" th:field="*{codigo}" required>
+                <label>Nombre:</label>
+                <input type="text" placeholder="Ingrese el nombre" th:field="*{nombre}" required>
+                <label>Descripción:</label>
+                <input type="text" placeholder="Ingrese la descripción" th:field="*{descripcion}" required>
+                <label>Stock:</label>
+                <input type="text" placeholder="Ingrese stock" th:field="*{stock}" required>
+                <label>Precio:</label>
+                <input type="number" placeholder="Ingrese el precio" th:field="*{precio}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a class="btn-item" style="width:587px;height:40px; text-align: center "
+                th:href="@{/producto/lista}">Lista</a>
+            <input type="hidden" th:field="*{productoId}">
+        </form>
+    </div>
+</body>
+
+</html>
